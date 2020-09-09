@@ -6,7 +6,7 @@ namespace TimedTodo.Domain
 {
   public class TaskDefinition
   {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Title { get; set; }
     //TODO: Figure out timespan for default time
   }

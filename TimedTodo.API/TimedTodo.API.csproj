@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TimedTodo.Data\TimedTodo.Data.csproj" />
+    <ProjectReference Include="..\TimedTodo.Domain\TimedTodo.Domain.csproj" />
   </ItemGroup>
 
 

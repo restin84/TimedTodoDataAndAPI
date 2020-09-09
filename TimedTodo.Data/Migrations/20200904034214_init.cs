@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TimedTodo.Data.Migrations
 {
@@ -10,8 +11,7 @@ namespace TimedTodo.Data.Migrations
                 name: "TaskDefinitions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

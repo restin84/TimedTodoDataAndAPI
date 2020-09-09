@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TimedTodo.API.Services;
+using TimedTodo.Data;
 
 namespace TimedTodo.API
 {
@@ -23,6 +26,13 @@ namespace TimedTodo.API
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
       services.AddControllers();
+
+      services.AddScoped<ITimedTodoRepository, TimedTodoRepository>();
+
+      services.AddDbContext<TimedTodoContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("TimedTodoConnection"))
+               .EnableSensitiveDataLogging()
+      );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
