@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace TimedTodo.API.Services
 
     public IEnumerable<TaskDefinition> GetTaskDefinitions() {
       return timedTodoContext.TaskDefinitions.ToList();
+    }
+
+    public async Task<TaskDefinition> GetTaskDefinitionAsync(Guid taskDefinitionId) {
+      return await timedTodoContext.TaskDefinitions.Where(t => t.Id == taskDefinitionId).FirstOrDefaultAsync();
+    } 
+
+    public async Task<IEnumerable<TaskDefinition>> GetTaskDefinitionsAsync() {
+      return await timedTodoContext.TaskDefinitions.ToListAsync();
     }
   }
 }

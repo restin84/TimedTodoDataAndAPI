@@ -10,5 +10,9 @@ namespace TimedTodo.API.Services
   {
     public TaskDefinition GetTaskDefinition(Guid taskDefinitionId);
     public IEnumerable<TaskDefinition> GetTaskDefinitions();
+
+    public Task<TaskDefinition> GetTaskDefinitionAsync(Guid taskDefinitionId);
+
+    public Task<IEnumerable<TaskDefinition>> GetTaskDefinitionsAsync();
   }
 }
