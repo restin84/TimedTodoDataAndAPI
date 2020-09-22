@@ -33,6 +33,9 @@ namespace TimedTodo.Data
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      modelBuilder.Entity<TaskDefinition>()
+        .Property(t => t.DefaultTimeSpan)
+        .HasConversion(new TimeSpanToTicksConverter());
       int numTaskDefs = 1000;
       var taskDefs = new List<TaskDefinition>(numTaskDefs);
       for (int i = 0; i < numTaskDefs; i++) {
@@ -40,9 +43,9 @@ namespace TimedTodo.Data
           new TaskDefinition {
             Id = Guid.NewGuid(),
             Title = $"TaskDefinition {i + 1}",
-            DefaultTimeSpan = 500
+            DefaultTimeSpan = new TimeSpan()
           }
-          ); ;
+          );
       }
       modelBuilder.Entity<TaskDefinition>().HasData(
           taskDefs
