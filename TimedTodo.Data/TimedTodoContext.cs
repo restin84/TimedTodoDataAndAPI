@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
+using System.Collections.Generic;
 using TimedTodo.Domain;
 
 namespace TimedTodo.Data
@@ -27,6 +30,24 @@ namespace TimedTodo.Data
 
     public TimedTodoContext(DbContextOptions<TimedTodoContext> options) : base(options) {
       ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+      int numTaskDefs = 1000;
+      var taskDefs = new List<TaskDefinition>(numTaskDefs);
+      for (int i = 0; i < numTaskDefs; i++) {
+        taskDefs.Add(
+          new TaskDefinition {
+            Id = Guid.NewGuid(),
+            Title = $"TaskDefinition {i + 1}",
+            DefaultTimeSpan = 500
+          }
+          ); ;
+      }
+      modelBuilder.Entity<TaskDefinition>().HasData(
+          taskDefs
+        );
+      base.OnModelCreating(modelBuilder);
     }
   }
 }

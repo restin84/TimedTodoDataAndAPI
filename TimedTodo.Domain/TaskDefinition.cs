@@ -8,6 +8,7 @@ namespace TimedTodo.Domain
   {
     public Guid Id { get; set; }
     public string Title { get; set; }
-    //TODO: Figure out timespan for default time
+    public long DefaultTimeSpan { get; set; }
+
   }
 }

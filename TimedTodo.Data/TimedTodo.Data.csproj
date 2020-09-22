@@ -14,4 +14,8 @@
     <ProjectReference Include="..\TimedTodo.Domain\TimedTodo.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
+
 </Project>

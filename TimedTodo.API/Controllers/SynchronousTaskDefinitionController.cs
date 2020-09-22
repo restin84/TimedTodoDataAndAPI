@@ -8,25 +8,20 @@ using TimedTodo.API.Services;
 namespace TimedTodo.API.Controllers
 {
   [ApiController]
-  [Route("api/taskdefinitions")]
-  public class TaskDefinitionController : ControllerBase
+  [Route("api/synchronoustaskdefinitions")]
+  public class SynchronousTaskDefinitionController : ControllerBase
   {
     private readonly ITimedTodoRepository timedTodoRepository;
 
-    public TaskDefinitionController(ITimedTodoRepository timedTodoRepository) {
+    public SynchronousTaskDefinitionController(ITimedTodoRepository timedTodoRepository) {
       this.timedTodoRepository = timedTodoRepository ??
         throw new ArgumentNullException(nameof(timedTodoRepository));
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetTaskDefinitions() {
-      var taskDefinitions = await timedTodoRepository.GetTaskDefinitionsAsync();
+    public IActionResult GetTaskDefinitions() {
+      var taskDefinitions = timedTodoRepository.GetTaskDefinitions();
       return Ok(taskDefinitions);
-    }
-
-    [HttpGet("{taskDefinitionId}")]
-    public IActionResult GetTaskDefinition(Guid taskDefinitionId) {
-      return Ok();
     }
   }
 }

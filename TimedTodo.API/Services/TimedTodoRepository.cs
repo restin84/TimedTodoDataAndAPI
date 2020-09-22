@@ -23,6 +23,7 @@ namespace TimedTodo.API.Services
     }
 
     public IEnumerable<TaskDefinition> GetTaskDefinitions() {
+      timedTodoContext.Database.ExecuteSqlRaw("waitfor delay '00:00:02';");
       return timedTodoContext.TaskDefinitions.ToList();
     }
 
@@ -31,6 +32,7 @@ namespace TimedTodo.API.Services
     } 
 
     public async Task<IEnumerable<TaskDefinition>> GetTaskDefinitionsAsync() {
+      await timedTodoContext.Database.ExecuteSqlRawAsync("waitfor delay '00:00:02';");
       return await timedTodoContext.TaskDefinitions.ToListAsync();
     }
   }
