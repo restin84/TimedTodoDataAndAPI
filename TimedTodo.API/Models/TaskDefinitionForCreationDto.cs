@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace TimedTodo.API.Models
+﻿namespace TimedTodo.API.Models
 {
-  public class TaskDefinitionDto
+  public class TaskDefinitionForCreationDto
   {
-    public Guid Id { get; set; }
     public string Title { get; set; }
     public int Hours { get; set; }
     public int Minutes { get; set; }

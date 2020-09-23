@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TimedTodo.API.Services;
 
 namespace TimedTodo.API.Controllers
@@ -13,13 +10,15 @@ namespace TimedTodo.API.Controllers
   {
     private readonly ITimedTodoRepository timedTodoRepository;
 
-    public SynchronousTaskDefinitionController(ITimedTodoRepository timedTodoRepository) {
+    public SynchronousTaskDefinitionController(ITimedTodoRepository timedTodoRepository)
+    {
       this.timedTodoRepository = timedTodoRepository ??
         throw new ArgumentNullException(nameof(timedTodoRepository));
     }
 
     [HttpGet]
-    public IActionResult GetTaskDefinitions() {
+    public IActionResult GetTaskDefinitions()
+    {
       var taskDefinitions = timedTodoRepository.GetTaskDefinitions();
       return Ok(taskDefinitions);
     }

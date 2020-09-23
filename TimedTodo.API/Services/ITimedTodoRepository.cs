@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TimedTodo.Domain;
 
@@ -14,5 +13,9 @@ namespace TimedTodo.API.Services
     public Task<TaskDefinition> GetTaskDefinitionAsync(Guid taskDefinitionId);
 
     public Task<IEnumerable<TaskDefinition>> GetTaskDefinitionsAsync();
+
+    public void AddTaskDefinition(TaskDefinition taskDefinition);
+
+    public Task<bool> SaveChangesAsync();
   }
 }

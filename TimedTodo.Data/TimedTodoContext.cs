@@ -28,19 +28,23 @@ namespace TimedTodo.Data
     //      @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = TimedTodoData");
     //}
 
-    public TimedTodoContext(DbContextOptions<TimedTodoContext> options) : base(options) {
+    public TimedTodoContext(DbContextOptions<TimedTodoContext> options) : base(options)
+    {
       ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
       modelBuilder.Entity<TaskDefinition>()
         .Property(t => t.DefaultTimeSpan)
         .HasConversion(new TimeSpanToTicksConverter());
       int numTaskDefs = 1000;
       var taskDefs = new List<TaskDefinition>(numTaskDefs);
-      for (int i = 0; i < numTaskDefs; i++) {
+      for (int i = 0; i < numTaskDefs; i++)
+      {
         taskDefs.Add(
-          new TaskDefinition {
+          new TaskDefinition
+          {
             Id = Guid.NewGuid(),
             Title = $"TaskDefinition {i + 1}",
             DefaultTimeSpan = new TimeSpan()
