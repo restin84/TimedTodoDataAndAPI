@@ -19,5 +19,12 @@ namespace TimedTodo.API.Tests
         return taskDefinition.Id;
       }
     }
+
+    public static DbContextOptionsBuilder<TimedTodoContext> SetupInMemoryDatabase(string databaseName)
+    {
+      var builder = new DbContextOptionsBuilder<TimedTodoContext>();
+      builder.UseInMemoryDatabase(databaseName);
+      return builder;
+    }
   }
 }
