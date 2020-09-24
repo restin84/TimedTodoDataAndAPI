@@ -9,7 +9,7 @@ namespace TimedTodo.Data
   public class TimedTodoContext : DbContext
   {
     public DbSet<TaskDefinition> TaskDefinitions { get; set; }
-
+    public DbSet<TaskInstance> TaskInstances { get; set; }
     //TODO: Should this be removed or left around so that I can use the 
     //context from a console app?
     ////We need a ILoggerFactory to supply to the UseLoggerFactory method
