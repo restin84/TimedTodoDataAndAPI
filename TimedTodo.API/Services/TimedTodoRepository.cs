@@ -19,16 +19,6 @@ namespace TimedTodo.API.Services
         throw new ArgumentNullException(nameof(timedTodoContext));
     }
 
-    public TaskDefinition GetTaskDefinition(Guid taskDefinitionId)
-    {
-      throw new NotImplementedException();
-    }
-
-    public IEnumerable<TaskDefinition> GetTaskDefinitions()
-    {
-      return timedTodoContext.TaskDefinitions.ToList();
-    }
-
     public async Task<TaskDefinition> GetTaskDefinitionAsync(Guid taskDefinitionId)
     {
       return await timedTodoContext.TaskDefinitions.Where(t => t.Id == taskDefinitionId).FirstOrDefaultAsync();
