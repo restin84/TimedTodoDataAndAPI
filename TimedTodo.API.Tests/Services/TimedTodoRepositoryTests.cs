@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using TimedTodo.API.Tests.Helpers;
 using TimedTodo.Data;
 using TimedTodo.Domain;
 
-namespace TimedTodo.API.Tests
+namespace TimedTodo.API.Tests.Services
 {
   [TestClass]
   public class TimedTodoRepositoryTests
@@ -70,6 +71,25 @@ namespace TimedTodo.API.Tests
         var repository = new TimedTodoRepository(context);
         var taskDefinitions = await repository.GetTaskDefinitionsAsync();
         Assert.IsTrue(taskDefinitions.ToList().Count == 0);
+      }
+    }
+
+    [TestMethod]
+    public async Task RepositoryCanAddTaskDefinition()
+    {
+      var taskDefinition = new TaskDefinition
+      {
+        Title = "Task Definition",
+        DefaultTimeSpan = new TimeSpan(),
+      };
+      var builder = TestsHelper.SetupInMemoryDatabase(Guid.NewGuid().ToString());
+      using (var context = new TimedTodoContext(builder.Options))
+      {
+        var repo = new TimedTodoRepository(context);
+        repo.AddTaskDefinition(taskDefinition);
+        await repo.SaveChangesAsync();
+        var savedTaskDefinition = (await repo.GetTaskDefinitionsAsync()).First();
+        Assert.AreEqual(0, (new TaskDefinitionComparer().Compare(taskDefinition, savedTaskDefinition)));
       }
     }
   }
