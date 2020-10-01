@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using TimedTodo.API.Filters;
 using TimedTodo.API.Models;
 using TimedTodo.API.Services;
 using TimedTodo.Domain;
@@ -25,6 +26,7 @@ namespace TimedTodo.API.Controllers
     }
 
     [HttpGet]
+    [TaskDefinitionsResultFilter]
     public async Task<IActionResult> GetTaskDefinitions()
     {
       var taskDefinitions = await timedTodoRepository.GetTaskDefinitionsAsync();
@@ -33,7 +35,7 @@ namespace TimedTodo.API.Controllers
 
     [HttpGet("{taskDefinitionId}")]
     [Route("{id}", Name = "GetTaskDefinition")]
-    //TODO: add filter for return Dto
+    [TaskDefinitionResultFilter]
     public async Task<IActionResult> GetTaskDefinition(Guid taskDefinitionId)
     {
       var taskDefinition = await timedTodoRepository.GetTaskDefinitionAsync(taskDefinitionId);
@@ -45,7 +47,8 @@ namespace TimedTodo.API.Controllers
     }
 
     [HttpPost]
-    //TODO: add filter for return Dto
+    [TaskDefinitionResultFilter]
+    //TODO: validation
     public async Task<IActionResult> CreateTaskDefinition(TaskDefinitionForCreationDto taskDefinitionForCreation)
     {
       var taskDefinitionEntity = mapper.Map<TaskDefinition>(taskDefinitionForCreation);
