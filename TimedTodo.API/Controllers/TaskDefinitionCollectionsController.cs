@@ -1,0 +1,56 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TimedTodo.API.ModelBinders;
+using TimedTodo.API.Models;
+using TimedTodo.API.Services;
+using TimedTodo.Domain;
+
+namespace TimedTodo.API.Controllers
+{
+  [ApiController]
+  [Route("api/taskdefinitioncollections")]
+  public class TaskDefinitionCollectionsController : ControllerBase
+  {
+    private readonly ITimedTodoRepository timedTodoRepository;
+    private readonly IMapper mapper;
+
+    public TaskDefinitionCollectionsController(ITimedTodoRepository timedTodoRepository,
+      IMapper mapper)
+    {
+      this.timedTodoRepository = timedTodoRepository ??
+        throw new ArgumentNullException(nameof(timedTodoRepository));
+      this.mapper = mapper ??
+        throw new ArgumentNullException(nameof(mapper));
+    }
+
+    [HttpGet("({taskDefinitionIds})")]
+    public async Task<IActionResult> GetTaskDefinitionCollection(
+      [ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> taskDefinitionIds)
+    {
+      //TODO: add method to repository to get the task definitions according to the provided ids
+      throw new NotImplementedException();
+    }
+
+    [HttpPost]
+    //TODO: validation
+    public async Task<IActionResult> CreateBookCollection(
+      IEnumerable<TaskDefinitionForCreationDto> taskDefinitionCollection)
+    {
+      var taskDefinitionEntities = mapper.Map<IEnumerable<TaskDefinition>>(taskDefinitionCollection);
+
+
+      foreach (var taskDefinition in taskDefinitionEntities)
+      {
+        timedTodoRepository.AddTaskDefinition(taskDefinition);
+      }
+
+      await timedTodoRepository.SaveChangesAsync();
+
+      return Ok();
+    }
+  }
+}

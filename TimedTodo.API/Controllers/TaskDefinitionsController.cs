@@ -11,12 +11,12 @@ namespace TimedTodo.API.Controllers
 {
   [ApiController]
   [Route("api/taskdefinitions")]
-  public class TaskDefinitionController : ControllerBase
+  public class TaskDefinitionsController : ControllerBase
   {
     private readonly ITimedTodoRepository timedTodoRepository;
     private readonly IMapper mapper;
 
-    public TaskDefinitionController(ITimedTodoRepository timedTodoRepository,
+    public TaskDefinitionsController(ITimedTodoRepository timedTodoRepository,
       IMapper mapper)
     {
       this.timedTodoRepository = timedTodoRepository ??
