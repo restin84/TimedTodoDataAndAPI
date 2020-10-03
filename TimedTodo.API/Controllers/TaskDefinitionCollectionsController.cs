@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimedTodo.API.Filters;
 using TimedTodo.API.ModelBinders;
 using TimedTodo.API.Models;
 using TimedTodo.API.Services;
@@ -13,6 +14,7 @@ namespace TimedTodo.API.Controllers
 {
   [ApiController]
   [Route("api/taskdefinitioncollections")]
+  [TaskDefinitionsResultFilter]
   public class TaskDefinitionCollectionsController : ControllerBase
   {
     private readonly ITimedTodoRepository timedTodoRepository;
@@ -27,12 +29,18 @@ namespace TimedTodo.API.Controllers
         throw new ArgumentNullException(nameof(mapper));
     }
 
-    [HttpGet("({taskDefinitionIds})")]
+    [HttpGet("({taskDefinitionIds})", Name = "GetTaskDefinitionCollection")]
     public async Task<IActionResult> GetTaskDefinitionCollection(
       [ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> taskDefinitionIds)
     {
-      //TODO: add method to repository to get the task definitions according to the provided ids
-      throw new NotImplementedException();
+      var taskDefinitionEntities = await timedTodoRepository.GetTaskDefinitionsAsync(taskDefinitionIds);
+
+      if (taskDefinitionIds.Count() != taskDefinitionEntities.Count())
+      {
+        return NotFound();
+      }
+
+      return Ok(taskDefinitionEntities);
     }
 
     [HttpPost]
@@ -50,7 +58,15 @@ namespace TimedTodo.API.Controllers
 
       await timedTodoRepository.SaveChangesAsync();
 
-      return Ok();
+      var taskDefinitionsToReturn = await timedTodoRepository.GetTaskDefinitionsAsync(
+        taskDefinitionEntities.Select(t => t.Id).ToList());
+
+      var taskDefinitionIds = string.Join(',', taskDefinitionsToReturn.Select(t => t.Id).ToList());
+
+      return CreatedAtRoute(
+        "GetTaskDefinitionCollection",
+        new { taskDefinitionIds },
+        taskDefinitionsToReturn);
     }
   }
 }

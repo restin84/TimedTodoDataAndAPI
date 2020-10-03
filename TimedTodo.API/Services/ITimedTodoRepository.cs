@@ -12,6 +12,8 @@ namespace TimedTodo.API.Services
 
     public Task<IEnumerable<TaskDefinition>> GetTaskDefinitionsAsync();
 
+    public Task<IEnumerable<TaskDefinition>> GetTaskDefinitionsAsync(IEnumerable<Guid> taskDefinitionIds);
+
     public void AddTaskDefinition(TaskDefinition taskDefinition);
 
     public Task<bool> SaveChangesAsync();

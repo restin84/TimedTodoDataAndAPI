@@ -29,6 +29,11 @@ namespace TimedTodo.API.Services
       return await timedTodoContext.TaskDefinitions.ToListAsync();
     }
 
+    public async Task<IEnumerable<TaskDefinition>> GetTaskDefinitionsAsync(IEnumerable<Guid> taskDefinitionIds)
+    {
+      return await timedTodoContext.TaskDefinitions.Where(t => taskDefinitionIds.Contains(t.Id)).ToListAsync();
+    }
+
     public void AddTaskDefinition(TaskDefinition taskDefinition)
     {
       timedTodoContext.Add(taskDefinition);
