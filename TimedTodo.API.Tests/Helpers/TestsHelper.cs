@@ -20,18 +20,24 @@ namespace TimedTodo.API.Tests.Helpers
       }
     }
 
-    public static IList<TaskDefinition> SeedMultipleTaskDefinitions(
+    public static IEnumerable<TaskDefinition> SeedMultipleTaskDefinitions(
       DbContextOptions<TimedTodoContext> options, int numberToSeed)
     {
-      List<TaskDefinition> taskDefs = new List<TaskDefinition>();
-      for (int i = 0; i < numberToSeed; i++)
-      {
-        taskDefs.Add(new TaskDefinition() { Title = $"TaskDefinition {i}" });
-      }
+      IEnumerable<TaskDefinition> taskDefs = GetTaskDefinitions(numberToSeed);
       using (var context = new TimedTodoContext(options))
       {
         context.AddRange(taskDefs);
         context.SaveChanges();
+      }
+      return taskDefs;
+    }
+
+    public static IEnumerable<TaskDefinition> GetTaskDefinitions(int numberOfTaskDefs)
+    {
+      IList<TaskDefinition> taskDefs = new List<TaskDefinition>();
+      for (int i = 0; i < numberOfTaskDefs; i++)
+      {
+        taskDefs.Add(new TaskDefinition() { Title = $"TaskDefinition {i}" });
       }
       return taskDefs;
     }

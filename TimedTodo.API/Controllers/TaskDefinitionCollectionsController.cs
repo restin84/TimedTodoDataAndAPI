@@ -45,7 +45,7 @@ namespace TimedTodo.API.Controllers
 
     [HttpPost]
     //TODO: validation
-    public async Task<IActionResult> CreateBookCollection(
+    public async Task<IActionResult> CreateTaskDefinitionCollection(
       IEnumerable<TaskDefinitionForCreationDto> taskDefinitionCollection)
     {
       var taskDefinitionEntities = mapper.Map<IEnumerable<TaskDefinition>>(taskDefinitionCollection);
