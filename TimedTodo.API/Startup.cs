@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using TimedTodo.API.Services;
+using TimedTodo.API.Validation;
 using TimedTodo.Data;
 
 namespace TimedTodo.API
@@ -23,7 +25,8 @@ namespace TimedTodo.API
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddControllers();
+      services.AddControllers().AddFluentValidation(fv => 
+      fv.RegisterValidatorsFromAssemblyContaining<TaskDefinitionForCreationDtoValidator>());
 
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
