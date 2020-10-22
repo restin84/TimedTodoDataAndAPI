@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimedTodo.Data;
 
 namespace TimedTodo.Data.Migrations
 {
     [DbContext(typeof(TimedTodoContext))]
-    partial class TimedTodoContextModelSnapshot : ModelSnapshot
+    [Migration("20201020165554_ChangedNumberOfSeededTaskDefs")]
+    partial class ChangedNumberOfSeededTaskDefs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
+                .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -38,61 +40,61 @@ namespace TimedTodo.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c7c9f6d3-3d0e-4a3b-9918-ca3feb480f85"),
+                            Id = new Guid("5007d965-d723-4dac-a201-2b733dcdba9d"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 1"
                         },
                         new
                         {
-                            Id = new Guid("ebb95554-897d-4e0e-8cda-a2c8c84f36df"),
+                            Id = new Guid("bf0a2342-579e-4c0a-832e-e92af7bdae22"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 2"
                         },
                         new
                         {
-                            Id = new Guid("caef9a1f-860d-459f-ac12-838c3d713d39"),
+                            Id = new Guid("efc95079-2d72-4c41-95ca-eca28797fd04"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 3"
                         },
                         new
                         {
-                            Id = new Guid("73bed43c-6917-48be-bae7-77da35f8cac9"),
+                            Id = new Guid("a4647acd-c460-4161-8b3e-441e9f2c34b3"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 4"
                         },
                         new
                         {
-                            Id = new Guid("01851adb-dcc0-418d-8bd5-06214c512371"),
+                            Id = new Guid("c9571f78-a1fa-4ef2-9221-815946a2747c"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 5"
                         },
                         new
                         {
-                            Id = new Guid("9aa1baa1-7377-425e-a9e7-89b08288bf15"),
+                            Id = new Guid("221c8999-f391-4acf-a0bf-d987f75d1dfa"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 6"
                         },
                         new
                         {
-                            Id = new Guid("48bd310a-8106-4df2-aff7-96d6f94c71e0"),
+                            Id = new Guid("5d878df9-5d83-48d5-b86b-4967756425a9"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 7"
                         },
                         new
                         {
-                            Id = new Guid("f9a510b7-25db-4b2a-a9ab-97513ff9a932"),
+                            Id = new Guid("13920f15-74ba-4e21-800c-28e29e514fba"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 8"
                         },
                         new
                         {
-                            Id = new Guid("30bd93c2-f11d-4778-964f-3508a73da085"),
+                            Id = new Guid("00f137a3-921c-4a5f-80bb-a2f7221a48b1"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 9"
                         },
                         new
                         {
-                            Id = new Guid("e7e9c770-7556-4f95-85a0-dd94a48b27e9"),
+                            Id = new Guid("51b29271-a2c9-4153-b5da-0564f23ee1bb"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 10"
                         });
