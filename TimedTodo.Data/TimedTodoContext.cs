@@ -25,10 +25,13 @@ namespace TimedTodo.Data
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder
-        .UseLoggerFactory(ConsoleLoggerFactory)
-        .UseSqlServer(
-          @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = TimedTodoData");
+      if (!optionsBuilder.IsConfigured)
+      {
+        optionsBuilder
+            .UseLoggerFactory(ConsoleLoggerFactory)
+            .UseSqlServer(
+              @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = TimedTodoData"); 
+      }
     }
 
     public TimedTodoContext(DbContextOptions<TimedTodoContext> options) : base(options)
@@ -45,6 +48,9 @@ namespace TimedTodo.Data
     {
       modelBuilder.Entity<TaskDefinition>()
         .Property(t => t.DefaultTimeSpan)
+        .HasConversion(new TimeSpanToTicksConverter());
+      modelBuilder.Entity<TaskInstance>()
+        .Property(t => t.ElapsedTime)
         .HasConversion(new TimeSpanToTicksConverter());
       int numTaskDefs = 10;
       var taskDefs = new List<TaskDefinition>(numTaskDefs);

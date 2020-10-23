@@ -15,7 +15,7 @@ namespace TimedTodo.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
+                .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -38,61 +38,61 @@ namespace TimedTodo.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c7c9f6d3-3d0e-4a3b-9918-ca3feb480f85"),
+                            Id = new Guid("a96a7984-ffd0-4654-8f89-0298db3903bd"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 1"
                         },
                         new
                         {
-                            Id = new Guid("ebb95554-897d-4e0e-8cda-a2c8c84f36df"),
+                            Id = new Guid("e5da4dc2-c1e9-4341-9756-9639767a3512"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 2"
                         },
                         new
                         {
-                            Id = new Guid("caef9a1f-860d-459f-ac12-838c3d713d39"),
+                            Id = new Guid("d0d52735-2d38-42ed-97bd-8a099c1b07a1"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 3"
                         },
                         new
                         {
-                            Id = new Guid("73bed43c-6917-48be-bae7-77da35f8cac9"),
+                            Id = new Guid("b16a23ee-76c8-4ebf-ac3f-f70c3a3e5573"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 4"
                         },
                         new
                         {
-                            Id = new Guid("01851adb-dcc0-418d-8bd5-06214c512371"),
+                            Id = new Guid("e22b9297-5797-47f4-ba9e-61b392d86f09"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 5"
                         },
                         new
                         {
-                            Id = new Guid("9aa1baa1-7377-425e-a9e7-89b08288bf15"),
+                            Id = new Guid("542b7286-41b4-4e9c-9404-41186763d37e"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 6"
                         },
                         new
                         {
-                            Id = new Guid("48bd310a-8106-4df2-aff7-96d6f94c71e0"),
+                            Id = new Guid("f0f44299-9c0f-4ba9-99fe-c10fc42e923d"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 7"
                         },
                         new
                         {
-                            Id = new Guid("f9a510b7-25db-4b2a-a9ab-97513ff9a932"),
+                            Id = new Guid("88506f88-a7f5-4493-83ec-8a87f921d666"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 8"
                         },
                         new
                         {
-                            Id = new Guid("30bd93c2-f11d-4778-964f-3508a73da085"),
+                            Id = new Guid("f03fe60b-e441-46f3-90b0-d7f73891debf"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 9"
                         },
                         new
                         {
-                            Id = new Guid("e7e9c770-7556-4f95-85a0-dd94a48b27e9"),
+                            Id = new Guid("404b9dd4-6872-4ab1-8d2f-4034c75fc055"),
                             DefaultTimeSpan = 0L,
                             Title = "TaskDefinition 10"
                         });
@@ -104,8 +104,8 @@ namespace TimedTodo.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<TimeSpan>("ElapsedTime")
-                        .HasColumnType("time");
+                    b.Property<long>("ElapsedTime")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid?>("TaskDefinitionId")
                         .HasColumnType("uniqueidentifier");
