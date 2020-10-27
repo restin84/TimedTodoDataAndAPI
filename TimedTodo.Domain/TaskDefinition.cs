@@ -7,7 +7,6 @@ namespace TimedTodo.Domain
   {
     public Guid Id { get; set; }
     public string Title { get; set; }
-    [NotMapped]
     public TimeSpan DefaultTimeSpan { get; set; }
 
   }

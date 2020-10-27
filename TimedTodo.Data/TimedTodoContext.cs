@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using TimedTodo.Data.Configuration;
 using TimedTodo.Domain;
 
 namespace TimedTodo.Data
@@ -46,12 +47,12 @@ namespace TimedTodo.Data
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.Entity<TaskDefinition>()
-        .Property(t => t.DefaultTimeSpan)
-        .HasConversion(new TimeSpanToTicksConverter());
-      modelBuilder.Entity<TaskInstance>()
-        .Property(t => t.ElapsedTime)
-        .HasConversion(new TimeSpanToTicksConverter());
+      modelBuilder.ApplyConfiguration(new TaskDefinitionConfiguration());
+      modelBuilder.ApplyConfiguration(new TaskInstanceConfiguration());
+      //modelBuilder.Entity<TaskInstance>()
+      //  .Property(t => t.ElapsedTime)
+      //  .HasConversion(new TimeSpanToTicksConverter());
+
       int numTaskDefs = 10;
       var taskDefs = new List<TaskDefinition>(numTaskDefs);
       for (int i = 0; i < numTaskDefs; i++)
