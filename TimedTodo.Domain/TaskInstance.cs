@@ -9,6 +9,7 @@ namespace TimedTodo.Domain
   {
     public Guid Id { get; set; }
     public TimeSpan ElapsedTime { get; set; }
+
     public Guid TaskDefinitionId { get; set; }
     public TaskDefinition TaskDefinition { get; set; }
   }

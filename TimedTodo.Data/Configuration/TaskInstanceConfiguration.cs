@@ -15,9 +15,6 @@ namespace TimedTodo.Data.Configuration
       builder.Ignore(t => t.ElapsedTime);
       builder.Property(t => t.ElapsedTime)
         .HasConversion(new TimeSpanToTicksConverter());
-      //builder.HasOne(t => t.TaskDefinition)
-      //  .WithOne()
-      //  .
     }
   }
 }
