@@ -15,6 +15,8 @@ namespace TimedTodo.Data.Configuration
       builder.Ignore(t => t.DefaultTimeSpan);
       builder.Property(t => t.DefaultTimeSpan)
         .HasConversion(new TimeSpanToTicksConverter());
+      builder.Property(t => t.Title)
+        .HasMaxLength(256);
       
     }
   }
