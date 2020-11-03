@@ -12,6 +12,11 @@ namespace TimedTodo.API.Validation
     public TaskDefinitionForCreationDtoValidator()
     {
       RuleFor(x => x.Title).NotEmpty();
+      RuleFor(x => x.Hours).GreaterThanOrEqualTo(0);
+      RuleFor(x => x.Minutes).GreaterThanOrEqualTo(0);
+      RuleFor(x => x.Seconds).GreaterThanOrEqualTo(0);
     }
+
+    
   }
 }

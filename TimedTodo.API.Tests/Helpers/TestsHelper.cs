@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TimedTodo.API.Models;
 using TimedTodo.Data;
 using TimedTodo.Domain;
 
@@ -47,6 +48,19 @@ namespace TimedTodo.API.Tests.Helpers
       var builder = new DbContextOptionsBuilder<TimedTodoContext>();
       builder.UseInMemoryDatabase(databaseName);
       return builder;
+    }
+
+    public static TaskDefinitionForCreationDto GetTaskDefinitionForCreationDto(string title,
+      int hours, int minutes, int seconds)
+    {
+      var dto = new TaskDefinitionForCreationDto()
+      {
+        Title = title,
+        Hours = hours,
+        Minutes = minutes,
+        Seconds = seconds
+      };
+      return dto;
     }
   }
 }
