@@ -26,7 +26,7 @@ namespace TimedTodo.API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllers().AddFluentValidation(fv => 
-      fv.RegisterValidatorsFromAssemblyContaining<TaskDefinitionForCreationDtoValidator>());
+        fv.RegisterValidatorsFromAssemblyContaining<TaskDefinitionForCreationDtoValidator>());
 
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

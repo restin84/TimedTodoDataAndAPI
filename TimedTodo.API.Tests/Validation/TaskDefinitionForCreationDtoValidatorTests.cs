@@ -27,5 +27,21 @@ namespace TimedTodo.API.Tests.Validation
       var result = validator.TestValidate(dto);
       result.ShouldHaveValidationErrorFor(dto => dto.Seconds);
     }
+
+    [TestMethod]
+    public void ZeroSecondsDoesNotResultInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 1, 0, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldNotHaveAnyValidationErrors();
+    }
+
+    [TestMethod]
+    public void OneSecondsDoesNotResultInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 1, 0, 1);
+      var result = validator.TestValidate(dto);
+      result.ShouldNotHaveAnyValidationErrors();
+    }
   }
 }
