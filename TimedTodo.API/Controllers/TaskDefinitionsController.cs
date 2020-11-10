@@ -48,7 +48,6 @@ namespace TimedTodo.API.Controllers
 
     [HttpPost]
     [TaskDefinitionResultFilter]
-    //TODO: validation
     public async Task<IActionResult> CreateTaskDefinition(TaskDefinitionForCreationDto taskDefinitionForCreation)
     {
       var taskDefinitionEntity = mapper.Map<TaskDefinition>(taskDefinitionForCreation);
