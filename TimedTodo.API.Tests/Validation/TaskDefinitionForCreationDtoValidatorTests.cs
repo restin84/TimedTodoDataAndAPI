@@ -43,5 +43,53 @@ namespace TimedTodo.API.Tests.Validation
       var result = validator.TestValidate(dto);
       result.ShouldNotHaveAnyValidationErrors();
     }
+
+    [TestMethod]
+    public void MinutesLessThanZeroResultsInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 0, -1, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldHaveValidationErrorFor(dto => dto.Minutes);
+    }
+
+    [TestMethod]
+    public void ZeroMinutesDoesNotResultInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 0, 0, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldNotHaveAnyValidationErrors();
+    }
+
+    [TestMethod]
+    public void OneMinutesDoesNotResultInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 0, 1, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldNotHaveAnyValidationErrors();
+    }
+
+    [TestMethod]
+    public void HoursLessThanZeroResultsInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", -1, 0, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldHaveValidationErrorFor(dto => dto.Hours);
+    }
+
+    [TestMethod]
+    public void ZeroHoursDoesNotResultInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 0, 0, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldNotHaveAnyValidationErrors();
+    }
+
+    [TestMethod]
+    public void OneHoursDoesNotResultInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 1, 0, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldNotHaveAnyValidationErrors();
+    }
   }
 }
