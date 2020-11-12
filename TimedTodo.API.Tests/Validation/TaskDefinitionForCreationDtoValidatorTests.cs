@@ -25,7 +25,8 @@ namespace TimedTodo.API.Tests.Validation
     {
       var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 1, 0, -1);
       var result = validator.TestValidate(dto);
-      result.ShouldHaveValidationErrorFor(dto => dto.Seconds);
+      result.ShouldHaveValidationErrorFor(dto => dto.Seconds)
+        .WithErrorMessage(TaskDefinitionForCreationDtoValidator.SecondsGreaterThanOrEqualToZeroError);
     }
 
     [TestMethod]
@@ -49,7 +50,8 @@ namespace TimedTodo.API.Tests.Validation
     {
       var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 0, -1, 0);
       var result = validator.TestValidate(dto);
-      result.ShouldHaveValidationErrorFor(dto => dto.Minutes);
+      result.ShouldHaveValidationErrorFor(dto => dto.Minutes)
+        .WithErrorMessage(TaskDefinitionForCreationDtoValidator.MinutesGreaterThanOrEqualToZeroError);
     }
 
     [TestMethod]
@@ -73,7 +75,8 @@ namespace TimedTodo.API.Tests.Validation
     {
       var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", -1, 0, 0);
       var result = validator.TestValidate(dto);
-      result.ShouldHaveValidationErrorFor(dto => dto.Hours);
+      result.ShouldHaveValidationErrorFor(dto => dto.Hours)
+        .WithErrorMessage(TaskDefinitionForCreationDtoValidator.HoursGreaterThanOrEqualToZeroError);
     }
 
     [TestMethod]
@@ -88,6 +91,23 @@ namespace TimedTodo.API.Tests.Validation
     public void OneHoursDoesNotResultInError()
     {
       var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 1, 0, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldNotHaveAnyValidationErrors();
+    }
+
+    [TestMethod]
+    public void EmptyTitleResultsInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("", 0, 0, 0);
+      var result = validator.TestValidate(dto);
+      result.ShouldHaveValidationErrorFor(dto => dto.Title)
+        .WithErrorMessage(TaskDefinitionForCreationDtoValidator.TitleEmptyError);
+    }
+
+    [TestMethod]
+    public void NonEmptyTitleDoesNotResultInError()
+    {
+      var dto = TestsHelper.GetTaskDefinitionForCreationDto("Test", 0, 0, 0);
       var result = validator.TestValidate(dto);
       result.ShouldNotHaveAnyValidationErrors();
     }
