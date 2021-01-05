@@ -44,7 +44,6 @@ namespace TimedTodo.API.Controllers
     }
 
     [HttpPost]
-    //TODO: validation
     public async Task<IActionResult> CreateTaskDefinitionCollection(
       IEnumerable<TaskDefinitionForCreationDto> taskDefinitionCollection)
     {
